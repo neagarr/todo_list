@@ -1,6 +1,7 @@
 {% extends 'layouts/base.html' %}
 
-{% load crispy_forms_filters %}
+{#{% load crispy_forms_filters %}#}
+
 
 {% block content %}
   <header class="header-2">
@@ -12,7 +13,7 @@
             <br>
             <div style="display: flex;">
               <form method="get" action="" class="lead text-white mt-3" style="display: flex;">
-                {{ search_form|crispy }}
+                {{ search_form }}
                 <input type="submit" value="🔍" class="btn bg-gradient-faded-dark">
               </form>
               <p class="nav-item ms-lg-auto" style="">{% include "includes/pagination.html" %}</p>

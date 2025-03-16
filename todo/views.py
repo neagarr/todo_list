@@ -13,7 +13,6 @@ class TaskListView(
     generic.ListView
 ):
     model = Task
-    template_name = "todo/index.html"
     context_object_name = "task_list"
     paginate_by = 2
 
