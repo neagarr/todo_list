@@ -28,7 +28,7 @@ class Task(models.Model):
     )
 
     class Meta:
-        ordering = ("deadline",)
+        ordering = ("is_complete", "-created_at")
         verbose_name = "Task"
 
     def __str__(self):
