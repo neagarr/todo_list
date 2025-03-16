@@ -38,32 +38,40 @@
       <div class="row">
         <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto p-5 blur shadow-blur">
           <div class="row">
-            <table class="table">
-              <tr class="text-primary">
-                <th>TAGS</th>
-								<th>CONTENT</th>
-                <th>UPDATE</th>
-                <th>DELETE</th>
-              </tr>
+						<ul>
               {% for task in task_list %}
-                <tr>
-                  <td>
-										{% for tag in task.tags.all %}
-											<ul>
-												<li class="text-left">
-													{{ tag }}
-												</li>
-											</ul>
-                      {% empty %}
+                  <li>
+										{% if task.is_complete %}
+											<i class="text-white bg-success">Done !</i>
+										{% else %}
+											<i class="text-white bg-dark">NOT Done</i>
+										{% endif %}
+										<h5 class="text-bold font-monospace text-uppercase">{{task.content}}</h5>
+										<h6 class="text-danger">Deadline: {{ task.deadline }}</h6>
+										<h6>Created: {{ task.created_at }}</h6>
+										<h6>
+											Tags:
+											{% for tag in task.tags.all %}
+												{{ tag }}
+											{% empty %}
                         <p>No tags for this task!</p>
                       {% endfor %}
-									</td>
-									<td>{{task.content}}</td>
-                  <td><a href={% url "todo:task_update" pk=task.id %}>UPDATE</a></td>
-                  <td><a href={% url "todo:task_delete" pk=task.id %}>DELETE</a></td>
-                </tr>
+										</h6>
+										<btn class="btn btn-secondary"><a href={% url "todo:task_update" pk=task.id %}>UPDATE</a></btn>
+										<btn class="btn btn-danger"><a href={% url "todo:task_delete" pk=task.id %}>DELETE</a></btn>
+										{% if task.is_complete %}
+											<a href="{% url "todo:complete_undo" pk=task.id %}" class="btn btn-danger">
+                  			UNDO
+                			</a>
+										{% else %}
+											<a href="{% url "todo:complete_undo" pk=task.id %}" class="btn btn-success">
+                  			COMPLETE
+                			</a>
+										{% endif %}
+									</li>
+									<hr>
               {% endfor %}
-            </table>
+            </ul>
           </div>
         </div>
       </div>

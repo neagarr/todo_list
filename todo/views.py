@@ -1,4 +1,4 @@
-
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -64,3 +64,17 @@ class TagDeleteView(generic.DeleteView):
     model = Tag
     success_url = reverse_lazy("todo:tag_list")
     template_name = "todo/tag_confirm_delete.html"
+
+
+def complete_undo(request, pk):
+    current_url = request.META["HTTP_REFERER"]
+    task = Task.objects.get(id=pk)
+
+    if task.is_complete:
+        task.is_complete = False
+        task.save()
+    else:
+        task.is_complete = True
+        task.save()
+
+    return HttpResponseRedirect(current_url)

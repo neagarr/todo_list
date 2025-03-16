@@ -7,7 +7,8 @@ from todo.views import (
     TagListView,
     TagCreateView,
     TagUpdateView,
-    TagDeleteView
+    TagDeleteView,
+    complete_undo
 )
 
 
@@ -41,6 +42,11 @@ urlpatterns = [
         "tag/<int:pk>/delete/",
         TagDeleteView.as_view(),
         name="tag_delete"
+    ),
+    path(
+        "task/<int:pk>/complete_undo/",
+        complete_undo,
+        name="complete_undo",
     ),
 
 ]
