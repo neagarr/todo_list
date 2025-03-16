@@ -1,8 +1,6 @@
 {% extends "layouts/base.html" %}
-{% load crispy_forms_filters %}
 
 {% block content %}
-  {% load crispy_forms_filters %}
   <header class="header-2">
     <div class="page-header section-height-50 relative" style="background-image: url('/static/assets/img/curved-images/curved.jpg')">
       <div class="container">
@@ -37,7 +35,7 @@
           <div class="row">
             <form action="" method="post" novalidate>
               {% csrf_token %}
-              {{ form|crispy }}
+              {{ form }}
               <input class="btn btn-primary" type="submit" value="Submit">
             </form>
           </div>

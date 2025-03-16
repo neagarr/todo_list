@@ -1,21 +1,14 @@
 {% extends 'layouts/base.html' %}
 
-{#{% load crispy_forms_filters %}#}
-
-
 {% block content %}
   <header class="header-2">
-    <div class="page-header section-height-75 relative" style="background-image: url('/assets/img/curved-images/curved.jpg')">
+    <div class="page-header section-height-75 relative" style="background-image: url('/static/assets/img/curved-images/curved.jpg')">
       <div class="container">
         <div class="row">
           <div class="col-sm-9 text-center mx-auto">
-            <h1 class="text-white pt-3 mt-n5">TODO List</h1>
+            <h1 class="text-white pt-3 mt-n5">TASKS</h1>
             <br>
             <div style="display: flex;">
-              <form method="get" action="" class="lead text-white mt-3" style="display: flex;">
-                {{ search_form }}
-                <input type="submit" value="🔍" class="btn bg-gradient-faded-dark">
-              </form>
               <p class="nav-item ms-lg-auto" style="">{% include "includes/pagination.html" %}</p>
             </div>
           </div>

@@ -23,7 +23,7 @@ class Task(models.Model):
     is_complete = models.BooleanField(default=False)
     tags = models.ManyToManyField(
         Tag,
-        related_name="tags",
+        related_name="tasks",
         blank=True
     )
 

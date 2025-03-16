@@ -9,6 +9,7 @@ cleo==2.1.0
 click==8.1.8
 crashtest==0.4.1
 crispy-bootstrap4==2024.10
+crispy-bootstrap5==2024.10
 cryptography==41.0.4
 distlib==0.3.7
 Django==5.1.4

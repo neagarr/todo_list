@@ -1,7 +1,5 @@
 {% extends 'layouts/base.html' %}
 
-{% load crispy_forms_filters %}
-
 {% block content %}
   <header class="header-2">
     <div class="page-header section-height-75 relative" style="background-image: url('/static/assets/img/curved-images/curved.jpg')">
@@ -11,10 +9,6 @@
             <h1 class="text-white pt-3 mt-n5">TAGS</h1>
             <br>
             <div style="display: flex;">
-              <form method="get" action="" class="lead text-white mt-3" style="display: flex;">
-                {{ search_form|crispy }}
-                <input type="submit" value="🔍" class="btn bg-gradient-faded-dark">
-              </form>
               <p class="nav-item ms-lg-auto" style="">{% include "includes/pagination.html" %}</p>
             </div>
           </div>
@@ -38,7 +32,7 @@
     </div>
   </header>
 
-  {% if task_list %}
+  {% if tag_list %}
     <section class="pt-3 pb-4" id="count-stats">
     <div class="container">
       <div class="row">
