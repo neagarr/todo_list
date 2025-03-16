@@ -12,7 +12,7 @@ from todo.views import (
 
 
 urlpatterns = [
-    path("", TaskListView, name="index"),
+    path("", TaskListView.as_view(), name="index"),
 
     path("tasks/create/", TaskCreateView.as_view(), name="task_create"),
     path(

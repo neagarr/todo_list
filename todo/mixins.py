@@ -1,4 +1,4 @@
-from manager.forms import SearchForm
+from todo.forms import SearchForm
 
 
 class ContextMixin:
