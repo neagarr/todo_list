@@ -8,7 +8,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-9 text-center mx-auto">
-            <h1 class="text-white pt-3 mt-n5">{{ object|yesno:"Update,Create" }} Task</h1>
+            <h1 class="text-white pt-3 mt-n5">{{ object|yesno:"Update,Create" }} Tag</h1>
           </div>
         </div>
       </div>
@@ -48,7 +48,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-auto text-center mx-auto">
-          <a class="page-link bg-gradient-secondary text-purple" style="border-radius: 10px 10px 10px 10px" href={% url "manager:task_list" %}>BACK</a>
+          <a class="page-link bg-gradient-secondary text-purple" style="border-radius: 10px 10px 10px 10px" href={% url "todo:tag_list" %}>BACK</a>
       </div>
     </div>
   </div>

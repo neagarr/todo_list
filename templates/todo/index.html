@@ -8,7 +8,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-9 text-center mx-auto">
-            <h1 class="text-white pt-3 mt-n5">Workers List</h1>
+            <h1 class="text-white pt-3 mt-n5">TODO List</h1>
             <br>
             <div style="display: flex;">
               <form method="get" action="" class="lead text-white mt-3" style="display: flex;">
@@ -38,37 +38,35 @@
     </div>
   </header>
 
-  {% if worker_list %}
-    <section class="pt-3 pb-4">
+  {% if task_list %}
+    <section class="pt-3 pb-4" id="count-stats">
     <div class="container">
       <div class="row">
         <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto p-5 blur shadow-blur">
           <div class="row">
             <table class="table">
               <tr class="text-primary">
-                <th>ID</th>
-                <th>Username</th>
-                <th>Position</th>
-                <th>Tasks</th>
+                <th>TAGS</th>
+								<th>CONTENT</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
               </tr>
-              {% for worker in worker_list %}
+              {% for task in task_list %}
                 <tr>
-                  <td>{{ worker.id }}</td>
-                  <td><a href="{% url 'manager:worker_detail' worker.id %}">{{ worker.username }}</a></td>
-                  <td>{{worker.position}}</td>
                   <td>
-                    {% if worker.tasks.all %}
-                      <ol>
-                        {% for task in worker.tasks.all %}
-                          <li>
-                            <a href="{% url 'manager:task_detail' task.id %}">{{ task.name }}</a>
-                          </li>
-                        {% empty %}
-                          <p>No tasks for this worker!</p>
-                        {% endfor %}
-                      </ol>
-                    {% endif %}
-                  </td>
+										{% for tag in task.tags.all %}
+											<ul>
+												<li class="text-left">
+													{{ tag }}
+												</li>
+											</ul>
+                      {% empty %}
+                        <p>No tags for this task!</p>
+                      {% endfor %}
+									</td>
+									<td>{{task.content}}</td>
+                  <td><a href={% url "todo:task_update" pk=task.id %}>UPDATE</a></td>
+                  <td><a href={% url "todo:task_delete" pk=task.id %}>DELETE</a></td>
                 </tr>
               {% endfor %}
             </table>
@@ -78,6 +76,13 @@
     </div>
     </section>
   {% else %}
-      <p>There are no workers in Manager</p>
+      <p>There are no tasks in ToDo List</p>
   {% endif %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-auto text-center mx-auto">
+          <a class="page-link bg-gradient-secondary text-purple" style="border-radius: 10px 10px 10px 10px" href={% url "todo:task_create" %}>ADD NEW</a>
+      </div>
+    </div>
+  </div>
 {% endblock content %}

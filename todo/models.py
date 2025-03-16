@@ -1,9 +1,7 @@
-from django.conf import settings
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class TaskType(models.Model):
+class Tag(models.Model):
     name = models.CharField(
         max_length=50,
         unique=True
@@ -11,65 +9,22 @@ class TaskType(models.Model):
 
     class Meta:
         ordering = ("name",)
-        verbose_name = "Task Type"
+        verbose_name = "Tag"
 
     def __str__(self):
         return self.name
-
-
-class Position(models.Model):
-    name = models.CharField(
-        max_length=50,
-        unique=True,
-    )
-
-    class Meta:
-        ordering = ("name",)
-        verbose_name = "Position"
-
-    def __str__(self):
-        return self.name
-
-
-class Worker(AbstractUser):
-    position = models.ForeignKey(
-        Position,
-        blank=True,
-        related_name="workers",
-        on_delete=models.CASCADE,
-        null=True,
-    )
-
-    class Meta:
-        ordering = ("username",)
-        verbose_name = "Worker"
-
-    def __str__(self):
-        return (f"{self.position}: {self.username} "
-                f"({self.first_name} {self.last_name})")
 
 
 class Task(models.Model):
-    PRIORITY_CHOICES = [
-        ("Urgent", "Urgent"),
-        ("High", "High"),
-        ("Medium", "Medium"),
-        ("Low", "Low"),
-    ]
 
-    name = models.CharField(max_length=60)
-    description = models.TextField()
+    content = models.TextField()
+    created_at = models.DateField()
     deadline = models.DateField()
     is_complete = models.BooleanField(default=False)
-    priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES)
-    type_of_task = models.ForeignKey(
-        TaskType,
-        on_delete=models.CASCADE
-    )
-    assignees = models.ManyToManyField(
-        settings.AUTH_USER_MODEL,
-        related_name="tasks",
-        blank=True,
+    tags = models.ManyToManyField(
+        Tag,
+        related_name="tags",
+        blank=True
     )
 
     class Meta:
@@ -77,4 +32,4 @@ class Task(models.Model):
         verbose_name = "Task"
 
     def __str__(self):
-        return self.name
+        return self.tags

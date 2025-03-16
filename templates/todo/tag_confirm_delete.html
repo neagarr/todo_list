@@ -8,7 +8,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-9 text-center mx-auto">
-            <h1 class="text-white pt-3 mt-n5">Delete Position</h1>
+            <h1 class="text-white pt-3 mt-n5">Delete Tag</h1>
           </div>
         </div>
       </div>
@@ -29,13 +29,14 @@
       </div>
     </div>
   </header>
+  
   <section class="pt-6 pb-4" id="count-stats">
     <div class="container">
       <div class="row">
         <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto p-5 blur shadow-blur">
           <div class="row">
-            <p>Are You sure You want to delete the position: {{ position }} ?</p>
-            <p><i class="text-danger">All information about this position will be also deleted!</i></p>
+            <p>Are You sure You want to delete the tag: {{ tag }} ?</p>
+            <p><i class="text-danger">All information about this Tag will be also deleted!</i></p>
             <form action="" method="post">
               {% csrf_token %}
               <input type="submit" value="Yes, delete" class="btn btn-danger">
@@ -48,9 +49,8 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-auto text-center mx-auto">
-          <a class="page-link bg-gradient-secondary text-purple" style="border-radius: 10px 10px 10px 10px" href={% url "manager:position_list" %}>BACK</a>
+          <a class="page-link bg-gradient-secondary text-purple" style="border-radius: 10px 10px 10px 10px" href={% url "todo:tag_list" %}>BACK</a>
       </div>
     </div>
   </div>
-
 {% endblock %}
