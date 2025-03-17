@@ -1,6 +1,9 @@
-from django.http import HttpResponseRedirect
+import requests.sessions
+from django.http import HttpResponseRedirect, HttpRequest, request
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views import generic
+from django.views import generic, View
+from poetry.console.commands import self
 
 from .forms import TaskForm, TagForm
 from .mixins import QuerysetMixin
@@ -28,6 +31,7 @@ class TaskUpdateView(generic.UpdateView):
     success_url = reverse_lazy("todo:task_list")
     template_name = "todo/task_form.html"
     form_class = TaskForm
+    print(HttpRequest.__dict__)
 
 
 class TaskDeleteView(generic.DeleteView):
@@ -66,15 +70,9 @@ class TagDeleteView(generic.DeleteView):
     template_name = "todo/tag_confirm_delete.html"
 
 
-def complete_undo(request, pk):
-    current_url = request.META["HTTP_REFERER"]
-    task = Task.objects.get(id=pk)
-
-    if task.is_complete:
-        task.is_complete = False
+class TaskCompleteToggleView(View):
+    def post(self, request, pk, *args, **kwargs):
+        task = get_object_or_404(Task, id=pk)
+        task.is_complete = not task.is_complete
         task.save()
-    else:
-        task.is_complete = True
-        task.save()
-
-    return HttpResponseRedirect(current_url)
+        return HttpResponseRedirect(request.META.get("HTTP_REFERER", reverse_lazy("todo:task_list")))

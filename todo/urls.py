@@ -8,7 +8,7 @@ from todo.views import (
     TagCreateView,
     TagUpdateView,
     TagDeleteView,
-    complete_undo
+    TaskCompleteToggleView
 )
 
 
@@ -45,7 +45,7 @@ urlpatterns = [
     ),
     path(
         "task/<int:pk>/complete_undo/",
-        complete_undo,
+        TaskCompleteToggleView.as_view(),
         name="complete_undo",
     ),
 

@@ -59,15 +59,14 @@
 										</h6>
 										<btn class="btn btn-secondary"><a href={% url "todo:task_update" pk=task.id %}>UPDATE</a></btn>
 										<btn class="btn btn-danger"><a href={% url "todo:task_delete" pk=task.id %}>DELETE</a></btn>
-										{% if task.is_complete %}
-											<a href="{% url "todo:complete_undo" pk=task.id %}" class="btn btn-danger">
-                  			UNDO
-                			</a>
-										{% else %}
-											<a href="{% url "todo:complete_undo" pk=task.id %}" class="btn btn-success">
-                  			COMPLETE
-                			</a>
-										{% endif %}
+										<form action="{% url 'todo:complete_undo' pk=task.id %}" method="post" style="display:inline;">
+												{% csrf_token %}
+												{% if task.is_complete %}
+														<button type="submit" class="btn btn-danger">UNDO</button>
+												{% else %}
+														<button type="submit" class="btn btn-success">COMPLETE</button>
+												{% endif %}
+										</form>
 									</li>
 									<hr>
               {% endfor %}
